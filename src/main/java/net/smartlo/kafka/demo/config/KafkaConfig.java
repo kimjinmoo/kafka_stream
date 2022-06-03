@@ -56,15 +56,4 @@ public class KafkaConfig {
     configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
     return new KafkaAdmin(configs);
   }
-
-  /**
-   *
-   * 토픽 생성
-   *
-   * @return
-   */
-  @Bean
-  public NewTopic topic1() {
-    return new NewTopic("src-topic", 1, (short) 1);
-  }
 }
