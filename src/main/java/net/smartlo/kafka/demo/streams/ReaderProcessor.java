@@ -8,6 +8,7 @@ import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.Grouped;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KTable;
+import org.apache.kafka.streams.kstream.Printed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,8 @@ public class ReaderProcessor {
     KStream<String, String> simpleFirstStream = streamsBuilder.stream("src-topic",
         Consumed.with(STRING_SERDE, STRING_SERDE));
 
+    // 싱크프로세스
+    simpleFirstStream.print(Printed.<String, String>toSysOut().withLabel("Yelling App"));
     simpleFirstStream.to("output-topic");
   }
 }
