@@ -29,9 +29,9 @@ public class KafkaConfig {
   private String bootstrapAddress;
 
   /**
-   * 
+   *
    * 카프라 기본설정
-   * 
+   *
    * @return
    */
   @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
@@ -46,7 +46,7 @@ public class KafkaConfig {
   }
 
   /**
-   * 
+   *
    * 카프카 관리자
    * @return
    */
@@ -58,13 +58,13 @@ public class KafkaConfig {
   }
 
   /**
-   * 
+   *
    * 토픽 생성
-   * 
+   *
    * @return
    */
   @Bean
   public NewTopic topic1() {
-    return new NewTopic("input-topic", 1, (short) 1);
+    return new NewTopic("src-topic", 1, (short) 1);
   }
 }
