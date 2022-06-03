@@ -28,6 +28,12 @@ public class KafkaConfig {
   @Value(value = "${spring.kafka.bootstrap-servers}")
   private String bootstrapAddress;
 
+  /**
+   * 
+   * 카프라 기본설정
+   * 
+   * @return
+   */
   @Bean(name = KafkaStreamsDefaultConfiguration.DEFAULT_STREAMS_CONFIG_BEAN_NAME)
   KafkaStreamsConfiguration kStreamsConfig() {
     Map<String, Object> props = new HashMap<>();
@@ -39,6 +45,11 @@ public class KafkaConfig {
     return new KafkaStreamsConfiguration(props);
   }
 
+  /**
+   * 
+   * 카프카 관리자
+   * @return
+   */
   @Bean
   public KafkaAdmin kafkaAdmin() {
     Map<String, Object> configs = new HashMap<>();
@@ -46,6 +57,12 @@ public class KafkaConfig {
     return new KafkaAdmin(configs);
   }
 
+  /**
+   * 
+   * 토픽 생성
+   * 
+   * @return
+   */
   @Bean
   public NewTopic topic1() {
     return new NewTopic("input-topic", 1, (short) 1);
