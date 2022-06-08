@@ -63,7 +63,7 @@ public class ReaderProcessor {
     simpleFirstStream.foreach(simpleAction);
 
     // 싱크 프로세스 - 종료, debug 필요시 print 주석 품
-//    simpleFirstStream.print(Printed.<String, SampleModel>toSysOut().withLabel("[Smartlo]"));
+    simpleFirstStream.print(Printed.<String, SampleModel>toSysOut().withLabel("[Smartlo]"));
     simpleFirstStream.to("output-topic", Produced.with(STRING_SERDE, SAMPLE_MODEL_SERDE));
   }
 }
