@@ -2,6 +2,8 @@ package net.smartlo.kafka.demo.process.sample.controller;
 
 import com.github.javafaker.Faker;
 import java.util.Locale;
+import java.util.concurrent.ForkJoinPool;
+import java.util.stream.IntStream;
 import lombok.AllArgsConstructor;
 import net.smartlo.kafka.demo.model.SampleModel;
 import net.smartlo.kafka.demo.process.sample.service.SampleModelDataService;
@@ -37,6 +39,28 @@ public class ApiController {
             Faker.instance(Locale.KOREA).address().longitude()
         )
     );
+    return ResponseEntity.ok().build();
+  }
+
+  @GetMapping("/test/kafka/100000")
+  public ResponseEntity<Void> kafkaTest10000() {
+    // 8코어로 돌린다.
+    ForkJoinPool forkjoinPool = new ForkJoinPool(8);
+    forkjoinPool.submit(() -> {
+      // 10000개 데이터를 등록한다.
+      IntStream.range(0, 100000)
+          .parallel()
+          .forEach(index -> {
+            sampleModelDataService.sendKafkaSample(
+                new SampleModel(
+                    Faker.instance(Locale.KOREA).name().fullName(),
+                    20,
+                    Faker.instance(Locale.KOREA).address().latitude(),
+                    Faker.instance(Locale.KOREA).address().longitude()
+                )
+            );
+          });
+    });
     return ResponseEntity.ok().build();
   }
 }
