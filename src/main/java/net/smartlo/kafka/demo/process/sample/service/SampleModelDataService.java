@@ -41,7 +41,7 @@ public class SampleModelDataService {
    * @return 전체 카운트
    */
   public long count() {
-    return sampleModelDataRepository.findAll().stream().count();
+    return sampleModelDataRepository.count();
   }
 
   /**
