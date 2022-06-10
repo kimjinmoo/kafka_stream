@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -73,5 +74,11 @@ public class ApiController {
   @CrossOrigin(origins = "*")
   public ResponseEntity<Long> fetchAllCount() {
     return ResponseEntity.ok(sampleModelDataService.count());
+  }
+
+  @PutMapping("/sendMessage")
+  public ResponseEntity<String> testMessage() {
+    sampleModelDataService.sendMessage(Faker.instance(Locale.KOREA).app().name());
+    return ResponseEntity.ok("OK");
   }
 }
