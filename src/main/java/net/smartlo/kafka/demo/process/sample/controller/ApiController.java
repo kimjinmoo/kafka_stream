@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import net.smartlo.kafka.demo.model.SampleModel;
 import net.smartlo.kafka.demo.process.sample.service.SampleModelDataService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class ApiController {
   final SampleModelDataService sampleModelDataService;
 
   @GetMapping("/version")
+  @CrossOrigin(origins = "*")
   public ResponseEntity<String> fetchVersion() {
     return ResponseEntity
         .ok()
@@ -30,6 +32,7 @@ public class ApiController {
   }
 
   @GetMapping("/test/kafka")
+  @CrossOrigin(origins = "*")
   public ResponseEntity<Void> kafkaTest() {
     sampleModelDataService.sendKafkaSample(
         new SampleModel(
@@ -43,6 +46,7 @@ public class ApiController {
   }
 
   @GetMapping("/test/kafka/100000")
+  @CrossOrigin(origins = "*")
   public ResponseEntity<Void> kafkaTest10000() {
     // 8코어로 돌린다.
     ForkJoinPool forkjoinPool = new ForkJoinPool(8);
