@@ -36,6 +36,16 @@ public class SampleModelDataService {
 
   /**
    *
+   * 전체 데이터 카운터를 가져온다.
+   *
+   * @return 전체 카운트
+   */
+  public long count() {
+    return sampleModelDataRepository.findAll().stream().count();
+  }
+
+  /**
+   *
    * 카프카 샘플 데이터를 전달한다.
    *
    * @param sampleModel

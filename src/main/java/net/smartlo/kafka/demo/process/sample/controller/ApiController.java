@@ -10,6 +10,7 @@ import net.smartlo.kafka.demo.process.sample.service.SampleModelDataService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class ApiController {
         .body("1.0.0");
   }
 
-  @GetMapping("/test/kafka")
+  @PostMapping("/test/kafka")
   @CrossOrigin(origins = "*")
   public ResponseEntity<Void> kafkaTest() {
     sampleModelDataService.sendKafkaSample(
@@ -45,7 +46,7 @@ public class ApiController {
     return ResponseEntity.ok().build();
   }
 
-  @GetMapping("/test/kafka/100000")
+  @PostMapping("/test/kafka/100000")
   @CrossOrigin(origins = "*")
   public ResponseEntity<Void> kafkaTest10000() {
     // 8코어로 돌린다.
@@ -66,5 +67,11 @@ public class ApiController {
           });
     });
     return ResponseEntity.ok().build();
+  }
+
+  @GetMapping("/test/kafka/count")
+  @CrossOrigin(origins = "*")
+  public ResponseEntity<Long> fetchAllCount() {
+    return ResponseEntity.ok(sampleModelDataService.count());
   }
 }
