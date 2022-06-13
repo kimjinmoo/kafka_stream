@@ -59,7 +59,7 @@ public class SampleModelDataService {
   /**
    * 웹소켓을 전송한다.
    *
-   * @param message
+   * @param message 메세지
    */
   public void sendMessageProvider(String message) {
     simpMessagingTemplate.convertAndSend("/kafka/provider", Message
@@ -70,10 +70,31 @@ public class SampleModelDataService {
     );
   }
 
+  /**
+   *
+   * DB 등록 알림 소켓
+   *
+   * @param message 메세지
+   */
   public void sendMessageDBSave(String message) {
     simpMessagingTemplate.convertAndSend("/kafka/db", Message
         .builder()
         .type(String.format("192.168.1.30:%s", "8180"))
+        .contents(message)
+        .build()
+    );
+  }
+
+  /**
+   *
+   * 실시간 처리
+   *
+   * @param message 메세지
+   */
+  public void sendMessageStreamProc(String message) {
+    simpMessagingTemplate.convertAndSend("/kafka/stream", Message
+        .builder()
+        .type(String.format("192.168.1.30:%s", "8185"))
         .contents(message)
         .build()
     );
