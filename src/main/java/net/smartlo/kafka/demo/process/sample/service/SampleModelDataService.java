@@ -8,7 +8,6 @@ import net.smartlo.kafka.demo.entity.SampleModelData;
 import net.smartlo.kafka.demo.model.SampleModel;
 import net.smartlo.kafka.demo.process.sample.domain.Message;
 import net.smartlo.kafka.demo.process.sample.repository.SampleModelDataRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -27,9 +26,6 @@ public class SampleModelDataService {
   final KafkaTemplate kafkaTemplate;
 
   private SimpMessagingTemplate simpMessagingTemplate;
-
-  @Value("${server.port}")
-  final String port;
 
   /**
    * 샘플 모델 데이터 저장
@@ -68,7 +64,7 @@ public class SampleModelDataService {
   public void sendMessageProvider(String message) {
     simpMessagingTemplate.convertAndSend("/kafka/provider", Message
         .builder()
-        .type("sample")
+        .type("consumer")
         .contents(message)
         .build()
     );
@@ -77,7 +73,7 @@ public class SampleModelDataService {
   public void sendMessageDBSave(String message) {
     simpMessagingTemplate.convertAndSend("/kafka/db", Message
         .builder()
-        .type(String.format("192.168.1.30:%s", port))
+        .type(String.format("192.168.1.30:%s", "8180"))
         .contents(message)
         .build()
     );

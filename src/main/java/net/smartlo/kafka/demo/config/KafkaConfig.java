@@ -94,10 +94,10 @@ public class KafkaConfig {
   }
 
   /**
-   * 
+   *
    * KafkaTemplate 구현
    * KafkaTemplete을 DI 후 사용 가능
-   * 
+   *
    * @return KafkaTemplate 객체
    */
   @Bean
