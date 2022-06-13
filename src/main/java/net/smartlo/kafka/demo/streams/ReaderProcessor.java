@@ -19,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * 카프카 스트림 프로세서
- *
  */
 @Component
 @Slf4j
@@ -57,6 +55,7 @@ public class ReaderProcessor {
                 .lon(sample.getLon())
                 .build()
         );
+        sampleModelDataService.sendMessageDBSave("sample");
       }
     };
     // foreach - DB 저장 Action 실행

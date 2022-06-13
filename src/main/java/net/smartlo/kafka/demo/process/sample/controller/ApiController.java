@@ -78,7 +78,8 @@ public class ApiController {
 
   @PutMapping("/sendMessage")
   public ResponseEntity<String> testMessage() {
-    sampleModelDataService.sendMessage(Faker.instance(Locale.KOREA).app().name());
+    sampleModelDataService.sendMessageProvider(Faker.instance(Locale.KOREA).app().name());
+    sampleModelDataService.sendMessageDBSave(Faker.instance(Locale.KOREA).app().name());
     return ResponseEntity.ok("OK");
   }
 }

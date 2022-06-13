@@ -61,8 +61,17 @@ public class SampleModelDataService {
    *
    * @param message
    */
-  public void sendMessage(String message) {
-    simpMessagingTemplate.convertAndSend("/kafka", Message
+  public void sendMessageProvider(String message) {
+    simpMessagingTemplate.convertAndSend("/kafka/provider", Message
+        .builder()
+        .type("sample")
+        .contents(message)
+        .build()
+    );
+  }
+
+  public void sendMessageDBSave(String message) {
+    simpMessagingTemplate.convertAndSend("/kafka/db", Message
         .builder()
         .type("sample")
         .contents(message)
